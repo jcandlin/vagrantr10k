@@ -15,6 +15,10 @@ class puppetmaster {
   host { 'hostsetup':
     name => $fqdn,
     ip => '127.0.0.1',
+  } ->
+  service { 'puppetmaster':
+    ensure => running,
+    enable => true,
   }
 }
 
