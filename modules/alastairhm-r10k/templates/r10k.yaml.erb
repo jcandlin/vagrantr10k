@@ -1,6 +1,6 @@
 ---
-:cachedir: /var/cache/r10k
+:cachedir: <%= @r10k_cache %>
 :sources:
   :local:
-    remote: https://github.com/user/r10k-site
-    basedir: /etc/puppet/environments
+    remote: <%= @r10k_giturl %>
+    basedir: <%= @r10K_basedir %>

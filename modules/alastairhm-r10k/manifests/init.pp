@@ -16,7 +16,11 @@
 #
 # Copyright 2014 Alastair Montgomery
 #
-class r10k ( $r10k_giturl = 'https://github.com/user/r10k-site' ) {
+class r10k (
+    $r10k_giturl = 'https://github.com/user/r10k-site'
+    $r10k_cache  = '/var/cache/r10k'
+    $r10k_basedir = '/etc/puppet/environments'
+  ) {
   package { 'ruby':
     ensure => present,
   } ->
