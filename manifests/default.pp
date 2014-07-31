@@ -7,6 +7,14 @@ class puppetmaster {
   } ->
   package { 'puppet-server':
     ensure => present,
+  } ->
+  file { '/etc/puppet/puppet.conf':
+    ensure => present,
+    content => template('/vagrant/puppet.conf.erb'),
+  } ->
+  host { 'hostsetup':
+    name => $fqdn,
+    ip => '127.0.0.1',
   }
 }
 
