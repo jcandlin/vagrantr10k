@@ -17,7 +17,7 @@ class utils {
   service { 'iptables':
     ensure => stopped,
   }
-  exec { 'addrpm':
+  exec { 'adderlangrpm':
     command => '/bin/rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm',
     returns => [0,1],
   }
