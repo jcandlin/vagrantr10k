@@ -1,0 +1,6 @@
+---
+:cachedir: /var/cache/r10k
+:sources:
+  :local:
+    remote: <%= @gitlaburl %>
+    basedir: /etc/puppet/environments
