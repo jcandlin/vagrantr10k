@@ -4,12 +4,8 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-Vagrant::Config.run do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "puppetlabs/centos-6.5-32-puppet"
 
   # The url from where the 'config.vm.box' box will be fetched if it
@@ -32,14 +28,25 @@ Vagrant::Config.run do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-config.vm.forward_port 8080, 8080
-config.vm.forward_port 80, 9090
-config.vm.forward_port 4567, 1234
 
 config.vm.provision :puppet do |puppet|
   puppet.manifests_path = "manifests"
   puppet.manifest_file  = "default.pp"
   puppet.module_path = 'modules'
+end
+
+config.vm.define "puppetmaster" do |pm|
+  pm.vm.box = "puppetlabs/centos-6.5-32-puppet"
+  pm.vm.hostname = "puppetmaster"
+  pm.vm.network "private_network", ip: "192.168.50.3"
+  pm.vm.network :forwarded_port, guest:80, host:9091
+end
+
+config.vm.define "rabbitmq1" do |rmq|
+  rmq.vm.box = "puppetlabs/centos-6.5-32-puppet"
+  rmq.vm.hostname = "rabbitmq1"
+  rmq.vm.network "private_network", ip: "192.168.50.2"
+  rmq.vm.network :forwarded_port, guest:80, host:9090
 end
 
 end
