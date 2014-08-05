@@ -2,5 +2,5 @@
 :cachedir: /var/cache/r10k
 :sources:
   :local:
-    remote: https://github.com/user/r10k-site
+    remote: /usr/local/src/r10k-site.git
     basedir: /etc/puppet/environments

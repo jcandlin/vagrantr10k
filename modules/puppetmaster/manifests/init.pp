@@ -13,8 +13,8 @@ class puppetmaster {
   file { '/etc/puppet/autosign.conf':
     ensure => present,
     source => 'puppet:///modules/puppetmaster/autosign.conf',
-
-    } ->
+    mode => '644',
+  } ->
   host { 'hostsetup':
     name => $fqdn,
     ip => '127.0.0.1',
@@ -22,5 +22,18 @@ class puppetmaster {
   service { 'puppetmaster':
     ensure => running,
     enable => true,
+  }
+
+  file { '/usr/local/src/r10k-site.git':
+      ensure => directory,
+  } ->
+  exec { 'createbear':
+    command => '/usr/bin/git --bare init',
+    cwd => '/usr/local/src/r10k-site.git',
+    require => Class['utils'],
+  } ->
+  file { '/usr/local/src/r10k-site.git/hooks/post-receive':
+    content => 'sudo r10k deploy environment -p -v',
+    mode => 755,
   }
 }
