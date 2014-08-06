@@ -10,6 +10,11 @@ class puppetmaster {
     ensure => present,
     content => template('puppetmaster/puppet.conf.erb'),
   } ->
+  file { '/etc/puppet/autosign.conf':
+    ensure => present,
+    source => 'puppet:///modules/puppetmaster/autosign.conf',
+    mode => '644',
+  } ->
   host { 'hostsetup':
     name => $fqdn,
     ip => '127.0.0.1',
