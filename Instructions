@@ -1,0 +1,24 @@
+Vagrant R10k / Puppetmaster set up from 
+
+https://github.com/jcandlin/vagrantr10k
+	# for the vagrant server builds
+http://gitlab.williamhill-dev.local/JonCandlin/r10k-site
+	# for the puppet file and agent details
+
+Build VMs
+
+On local machine:
+Under dropbox/vagrant/r10k
+vagrant up
+cd projects/git/r10k-site
+git remote -v
+git remote add pm vagrant@127.0.0.1:2222/usr/local/src/r10k-site.git
+git remote add devlab  http://gitlab.williamhill-dev.local/JonCandlin/r10k-site.git
+
+	$ git remote -v
+	devhub  git@gitlab.williamhill-dev.local:AlastairMontgomery/r10k-site.git (fetch)
+	devhub  git@gitlab.williamhill-dev.local:AlastairMontgomery/r10k-site.git (push)
+	pm      ssh://vagrant@127.0.0.1:2222/usr/local/src/r10k-site.git (fetch)
+	pm      ssh://vagrant@127.0.0.1:2222/usr/local/src/r10k-site.git (push)
+
+Create ssh keys for local access to vagrant puppetmaster
