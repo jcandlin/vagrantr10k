@@ -1,4 +1,5 @@
-Vagrant R10k / Puppetmaster set up from 
+Vagrant R10k / Puppetmaster set up from:
+---------------------------
 
 https://github.com/jcandlin/vagrantr10k
 	# for the vagrant server builds
@@ -6,6 +7,7 @@ http://gitlab.williamhill-dev.local/JonCandlin/r10k-site
 	# for the puppet file and agent details
 
 Build VMs
+---------
 
 On local machine:
 Under dropbox/vagrant/r10k
@@ -21,4 +23,21 @@ git remote add devlab  http://gitlab.williamhill-dev.local/JonCandlin/r10k-site.
 	pm      ssh://vagrant@127.0.0.1:2222/usr/local/src/r10k-site.git (fetch)
 	pm      ssh://vagrant@127.0.0.1:2222/usr/local/src/r10k-site.git (push)
 
-Create ssh keys for local access to vagrant puppetmaster
+Create ssh keys for local access to vagrant puppetmaster:
+---------------------------------------------------------
+
+	drop local id_rsa.pub contents into the authorized_keys file of under the vagrant user of the puppetmaster
+
+On Puppetmaster VM:
+-------------------
+
+r10k deploy environment -p
+
+On Client Server VM:
+--------------------
+
+puppet agent -t
+
+
+		Know issues - if vagrant client is destroyed and rebuilt, certification with 
+					  puppetmaster is lost
